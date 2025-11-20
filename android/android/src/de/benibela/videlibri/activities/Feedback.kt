@@ -27,7 +27,7 @@ class Feedback : VideLibriBaseActivity() {
         get() {
             return try {
                 packageManager.getPackageInfo("de.benibela.videlibri", 0).versionName ?: "unknown"
-            } catch (e: PackageManager.NameNotFoundException) {
+            } catch (_: PackageManager.NameNotFoundException) {
                 "??"
             }
 
@@ -54,7 +54,7 @@ class Feedback : VideLibriBaseActivity() {
                     }
                     append(map.toList().joinToString("\n") { "${it.first}: ${it.second.joinToString(", ")}" })
                 }
-            } catch (ignored: Exception) {
+            } catch (_: Exception) {
                 append("??")
             }
 
@@ -166,7 +166,7 @@ class Feedback : VideLibriBaseActivity() {
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "VideLibri feedback $version")
             try {
                 startActivity(emailIntent)
-            } catch (e: ActivityNotFoundException) {
+            } catch (_: ActivityNotFoundException) {
                 showMessage(getString(R.string.error_nomailapp))
             }
         }

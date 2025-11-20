@@ -42,7 +42,7 @@ class LibraryListAdapter: MultiLevelListView.Adapter<LibraryListAdapter.Holder>(
             2 -> localLibs[position[0]][position[1]].size
             else -> 0
         }
-    } catch (e: IndexOutOfBoundsException) {
+    } catch (_: IndexOutOfBoundsException) {
         0
     }
     override fun getItemViewType(position: IntArray): Int = position.size
@@ -67,7 +67,7 @@ class LibraryListAdapter: MultiLevelListView.Adapter<LibraryListAdapter.Holder>(
             3 -> holder.text.text = getLibraryText(getLibraryId(position))
             else -> {}
         }
-    } catch (e: IndexOutOfBoundsException) {
+    } catch (_: IndexOutOfBoundsException) {
         @SuppressLint("SetTextI18n")
         holder.text.text = "MISSING"
     }

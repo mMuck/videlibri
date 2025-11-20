@@ -225,7 +225,7 @@ class Search: VideLibriBaseActivity(), SearchEventHandler {
                 "defaultLibId" to state.libId,
                 "reason" to getString(R.string.search_selectlib),
                 "search" to true
-        ) {resultCode, data -> withActivity<Search> {
+        ) { resultCode, _ -> withActivity<Search> {
             if (resultCode == Activity.RESULT_OK) {
                 state.libId = LibraryList.lastSelectedLibId ?: ""
                 state.libName = LibraryList.lastSelectedLibName ?: ""
