@@ -26,7 +26,7 @@ class Feedback : VideLibriBaseActivity() {
     internal val version: String
         get() {
             return try {
-                packageManager.getPackageInfo("de.benibela.videlibri", 0).versionName
+                packageManager.getPackageInfo("de.benibela.videlibri", 0).versionName ?: "unknown"
             } catch (e: PackageManager.NameNotFoundException) {
                 "??"
             }
