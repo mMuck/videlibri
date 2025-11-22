@@ -352,7 +352,7 @@ class VideLibriApp : Application() {
                 try {
                     val temp = JSONArray(prefs.getString("filterHistory", "[]"))
                     filterHistory = (0 until temp.length()).map { temp.getString(it) }.toTypedArray()
-                } catch (e: JSONException) {
+                } catch (_: JSONException) {
                     Log.i("videlibri", "Failed to parse filter history")
                 }
                 importExportFileName = prefs.getString("importExportFileName", "") ?: ""
