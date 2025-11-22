@@ -281,6 +281,7 @@ src)
 ;;
 
 	release)
+	  hg up
 	  ./manage.sh changelog		
 	  rm ~/hg/components/pascal/lib/*/*.o ~/hg/components/pascal/lib/*/*.ppu ~/hg/components/pascal/*.ppu ~/hg/components/pascal/data/*.ppu  lib/*/*.ppu
 	  
