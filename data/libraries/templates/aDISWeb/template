@@ -44,8 +44,10 @@
           <div class="error"><i class="fas"></i>{$error-login := ., i := 1000}</div>
           <p class="output-message output--error">{$error-login := ., i := 1000}</p><!--HS Offenburg-->
 
-          <!-- seems we already are on the correct page, send request again (not tested with any library) -->
-          <div id="konto-services"/>
+          <!-- seems we already are on the correct page. set $i to 1000 to abort loop.
+           (If an IDP system is used, the request will not be sent again. It must not be, as it would otherwise result in a 500 server error.)
+           (necessary for BLB Karlsruhe. )  -->
+          <div id="konto-services"><t:s>i:=1000</t:s></div>
           <td>Keine Ausleihen<t:s>i:=1000</t:s></td>
           <a t:condition="contains(., 'Ausleihe') and @href[contains(., '&amp;sp=SZ') or . = '#']"><t:s>i:=1000</t:s></a>
        
