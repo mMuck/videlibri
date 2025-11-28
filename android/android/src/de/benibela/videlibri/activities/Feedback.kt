@@ -72,7 +72,7 @@ class Feedback : VideLibriBaseActivity() {
             findViewById<EditText>(R.id.text).setText(it)
         }
 
-        if (VideLibriApp.errors.size > 0) {
+        if (VideLibriApp.errors.isNotEmpty()) {
             for (a in arrayOf(arrayOf(R.id.feedbackIncludeErrorDetails, R.id.feedbackIncludeErrorAnonymousDetails, R.id.feedbackIncludeErrors),
                                          arrayOf(R.id.feedbackACRAIncludeErrorDetails, R.id.feedbackACRAIncludeErrorAnonymousDetails, R.id.feedbackACRAIncludeErrors))
                     ) {
@@ -109,7 +109,7 @@ class Feedback : VideLibriBaseActivity() {
             Thread {
 
                 val system = systemInfo
-                val rep = if (errCache.size == 0) 1 else errCache.size
+                val rep = if (errCache.isEmpty()) 1 else errCache.size
                 var ok = 0
                 var err = ""
                 for (i in 0 until rep) { //send each error separately to avoid running out of memory
