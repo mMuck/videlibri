@@ -7,6 +7,6 @@
   <variable name="DB" value="118603"/>
   
   <homepage value="https://www.bistum-erfurt.de/bildung-kultur/medienstelle/"/>
-  <testing-search value="unknown"/>
-  <testing-account value="unknown"/>
+  <testing-search value="yes"/>
+  <testing-account value="yes"/>
 </library>
