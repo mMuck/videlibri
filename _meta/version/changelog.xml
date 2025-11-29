@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="../changelog.xsl"?>
 <changelog program="Bibliothek-App VideLibri">
-      <build version="2952" date="2025-11-22">
+      <build version="2953" date="2025-11-29">
         <download url="http://videlibri.sourceforge.net/updates/videlibri-setup.exe" platform="WINDOWS" execute="&quot;$DOWNLOAD&quot;  /SP- /noicons &quot;/dir=$OLDPATH&quot; " restart="true"/>
         <download url="http://videlibri.sourceforge.net/updates/videlibri-linux32.deb" platform="LINUX32" execute=""/>
         <download url="http://videlibri.sourceforge.net/updates/videlibri-linux64.deb" platform="LINUX64" execute=""/>
+        <change>android: Update zu Kotlin 2.1.20, appcompat 1.6.1, material 1.11.0</change>
+        <change>android: Update HTTPS-Zertifikate</change>
+        <fix>BLB Karlsruhe Login</fix>
+        <fix>android: Deaktiviere Android 15+ Rand-zu-Rand-Layout</fix>
+        <add>Stockelsdorf</add>
+     </build>
+      <build version="2952" date="2025-11-22">
         <change>android: Zielversion Android 15</change>
      </build>
       <build version="2950" date="2025-11-19">
