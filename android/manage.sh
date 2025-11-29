@@ -165,6 +165,7 @@ brokenServers)
    export SERVERLIST=../data/libraries/brokenServers.list
    export RESSERVERLIST=android/res/values/brokenServers.xml
    export TMPFILE=__vl__certificate.pem
+   export TMPFILE2=__vl__certificate2.pem
    export KEYTOOL=keytool
    export LANG=C.utf8
    export LC_ALL=C.utf8
@@ -177,13 +178,16 @@ brokenServers)
    FINGERPRINTFILEOLD=keystoreold.bks.fingerprints
    TEMPKEYSTORE=__vl__keystore.bks 
 
-
+   echo BOUNCYCASTLE: $bouncy
 
    echo '<?xml version="1.0" encoding="utf-8"?>' > $RESSERVERLIST
    echo "<resources>" >> $RESSERVERLIST
    echo '<string-array name="broken_servers"  translatable="false">' >> $RESSERVERLIST
    
    rm $KEYSTORE $KEYSTOREOLD $FINGERPRINTFILE $FINGERPRINTFILEOLD
+   #cp certs/keystore/empty.bks $KEYSTORE
+   #cp certs/keystore/emptyold.bks $KEYSTOREOLD
+   
    i=0
    (cat $SERVERLIST; ls certs/*.cer certs/intermediate/*.cer) |  while read server; do
      if [[ -n "$server" ]]; then      
@@ -207,7 +211,8 @@ brokenServers)
        fi
        
        cp $KEYSTORE $TEMPKEYSTORE
-       yes | $KEYTOOL       -import       -v       -trustcacerts       -alias $i       -file <(openssl x509 -in $TMPFILE)       -keystore $KEYSTORE       -storetype BKS       -provider org.bouncycastle.jce.provider.BouncyCastleProvider       -providerpath $BOUNCYCASTLE       -storepass $PASSWORD
+       openssl x509 -in $TMPFILE > $TMPFILE2
+       yes | $KEYTOOL       -import       -v       -trustcacerts       -alias $i       -file $TMPFILE2       -keystore $KEYSTORE       -storetype BKS       -provider org.bouncycastle.jce.provider.BouncyCastleProvider       -providerpath $BOUNCYCASTLE       -storepass $PASSWORD ||  echo keytool error ;
        
        echo -en "$server\t" >> $FINGERPRINTFILE
        if diff -q $KEYSTORE $TEMPKEYSTORE; then
@@ -217,7 +222,7 @@ brokenServers)
          
          
          echo -en "$server\t" >> $FINGERPRINTFILEOLD
-         yes | $KEYTOOL       -import       -v       -trustcacerts       -alias $i       -file <(openssl x509 -in $TMPFILE)       -keystore $KEYSTOREOLD       -storetype BKS-V1       -provider org.bouncycastle.jce.provider.BouncyCastleProvider       -providerpath $BOUNCYCASTLE       -storepass $PASSWORD
+         yes | $KEYTOOL       -import       -v       -trustcacerts       -alias $i       -file $TMPFILE2       -keystore $KEYSTOREOLD       -storetype BKS-V1       -provider org.bouncycastle.jce.provider.BouncyCastleProvider       -providerpath $BOUNCYCASTLE       -storepass $PASSWORD
          LANG=C keytool -list -v -alias $i -keystore $KEYSTOREOLD -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath $BOUNCYCASTLE -storetype BKS-V1 -storepass $PASSWORD | grep SHA256: >> $FINGERPRINTFILEOLD
        fi
        
@@ -248,7 +253,7 @@ brokenServers)
    
 
    
-   rm $TMPFILE
+   rm $TMPFILE $TMPFILE2
 ;;
 
 setupbinutils)
